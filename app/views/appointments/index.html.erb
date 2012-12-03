@@ -1,0 +1,21 @@
+<h1>Listing appointments</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @appointments.each do |appointment| %>
+  <tr>
+    <p><%= appointment.name %></p>
+    <p><%= appointment.description %></p>
+    <p><%= appointment.time %></p>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Appointment', new_appointment_path, :class => 'button' %>

@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+	<ul>Name: <%= @appointment.name %></ul>
+	<ul>Description: <%= @appointment.description %></ul>
+	<ul>Time: <%= @appointment.time %></ul>
+	<ul>Author: <%= @creator.username %></ul>
+	<ul>Participants:
+		<% @shares.each do |share|  %>
+			<%= share.user_id %>
+		<% end %></ul> 		
+</table>
+
+<% if current_user.id != @appointment.author_id %>
+	<%= link_to "Participate", participate_path(@appointment), :class => 'button' %>
+<% else %>
+	<p> you participate at this appointment </p>
+<% end %>
+
+<%= link_to 'Edit', edit_appointment_path(@appointment), :class => 'button' %> 
+<%= link_to 'Back', appointments_path, :class => 'button' %>
