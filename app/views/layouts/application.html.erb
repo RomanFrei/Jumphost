@@ -7,32 +7,32 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div id="header">
-	</div>
-	<div id="menu">
-		<% if current_user %>
-			<div class="menuitem">
-				<%= link_to "Edit Profile", edit_user_path(current_user.id) %>
+	<div id="page-bg">
+		<div id="container">
+			<div id="menu">
+				<% if current_user %>
+					<div class="menuitem">
+						<%= link_to "Edit Profile", edit_user_path(current_user.id), :class => 'menulink' %>
+					</div>
+					<div class="menuitem">
+						<%= link_to "Logout", :logout, :class => 'menulink' %>
+					</div>
+					<div class="menuitem">
+						<%= link_to "Appointments", date_path, :class => 'menulink' %>
+					</div>
+				<% else %>
+					<div class="menuitem">
+						<%= link_to "Register", new_user_path, :class => 'menulink' %>  
+					</div>
+					<div class="menuitem">
+						<%= link_to "Login", :login, :class => 'menulink' %>
+					</div>
+				<% end %>
 			</div>
-			<div class="menuitem">
-				<%= link_to "Logout", :logout %>
+			<div id="content">
+				<%= yield %>
 			</div>
-			<div class="menuitem">
-				<%= link_to "Appointments", date_path %>
-			</div>
-		<% else %>
-			<div class="menuitem">
-				<%= link_to "Register", new_user_path %>  
-			</div>
-			<div class="menuitem">
-				<%= link_to "Login", :login %>
-			</div>
-		<% end %>
-	</div>
-	<div id="content">
-		<%= yield %>
-	</div>
-	<div id="footer">
+		</div>
 	</div>
 </body>
 </html>
