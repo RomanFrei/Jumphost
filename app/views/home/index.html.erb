@@ -1,0 +1,8 @@
+<h3>Welcome to the WebGUI of my Jumphost</h3>
+<p>Index:</p>
+<table>
+	<ul>
+		<p><%= link_to "Appointments", appointments_path, :class => 'button' %></p>
+		<p>Latest: <%= @latest_appointment.name %>, <%= @latest_appointment.description %></p> 
+	</ul>
+</table>

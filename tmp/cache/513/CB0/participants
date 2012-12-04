@@ -1,0 +1,1 @@
+o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1354611035.2642298:@value"0I"&User.find(share.user_id).username:EF

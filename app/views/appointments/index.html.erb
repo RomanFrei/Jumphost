@@ -9,9 +9,12 @@
 
 <% @appointments.each do |appointment| %>
   <tr>
-    <p><%= appointment.name %></p>
+    <%= link_to appointment.name, appointment_path(appointment.id), :class => 'button' %>
     <p><%= appointment.description %></p>
     <p><%= appointment.time %></p>
+    <% if appointment.author_id == current_user.id %>
+	<p><%= link_to "Delete", destroy_appointment_path(:id => appointment.id), :class => 'button' %></p>
+    <% end %>
   </tr>
 <% end %>
 </table>

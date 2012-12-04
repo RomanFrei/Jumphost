@@ -16,11 +16,13 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
     @creator = User.find(@appointment.author_id)
     @shares = Shares.find(:all, :conditions => { :appointment_id => @appointment.id }) 
-    #TODO add name query
-    #@participants = @shares.each do |share|
-    #	User.find(share.user_id)
-    #end
-
+    @participants = User.all(:conditions => ["id IN (?)", @shares.map{|s| s.user_id}])
+    @assignment = Shares.find(:first, :conditions => [ 'appointment_id = ? AND user_id = ?', @appointment.id, current_user.id ] )
+    @participants.each do |p|
+      if p.id == current_user.id
+        @assigned = true
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @appointment }
