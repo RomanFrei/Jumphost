@@ -1,7 +1,11 @@
 class HomeController < ApplicationController
 
 def index
-  @latest_appointment = Appointment.last
+  if Appointment.count != 0
+  	@latest_appointment = Appointment.last.name
+  else
+  	@latest_appointment = "None"
+  end
 end
 
 def show

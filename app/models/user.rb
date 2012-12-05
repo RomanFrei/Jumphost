@@ -3,4 +3,5 @@ class User < ActiveRecord::Base
 	attr_accessible :username, :login, :email, :password, :password_confirmation
 	has_many :appointments
 	has_many :shares
+	has_many :comments
 end

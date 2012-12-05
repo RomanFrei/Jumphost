@@ -1,24 +1,22 @@
 <h1>Listing appointments</h1>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @appointments.each do |appointment| %>
-  <tr>
-    <%= link_to appointment.name, appointment_path(appointment.id), :class => 'button' %>
-    <p><%= appointment.description %></p>
-    <p><%= appointment.time %></p>
-    <% if appointment.author_id == current_user.id %>
-	<p><%= link_to "Delete", destroy_appointment_path(:id => appointment.id), :class => 'button' %></p>
-    <% end %>
-  </tr>
-<% end %>
+<table id="app_table">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Date</th>
+		<th>Action</th>
+	</tr>
+	<% @appointments.each do |appointment| %>
+		<tr>
+			<td><%= link_to appointment.name, appointment_path(appointment.id), :class => 'button' %></td>
+			<td><%= appointment.description %></td>
+			<td><%= format_time(appointment.time) %></td>
+			<% if appointment.author_id == current_user.id %>
+				<td><%= link_to "Edit", edit_appointment_path(appointment.id), :class => 'button' %> <%= link_to "Delete", destroy_appointment_path(:id => appointment.id), :class => 'button' %></td><br>
+			<% end %>
+		</tr>
+	<% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Appointment', new_appointment_path, :class => 'button' %>

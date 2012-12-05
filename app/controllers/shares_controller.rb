@@ -6,7 +6,7 @@ class SharesController < ApplicationController
     @share.user_id = current_user.id
     @share.appointment_id = params[:id]
     if @share.save
-	redirect_to :back, :notice => 'participation confirmed'
+	redirect_to :back, :notice => 'participation confirmed.'
     else
 	redirect_to :back
     end

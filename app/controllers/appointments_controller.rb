@@ -1,4 +1,5 @@
 class AppointmentsController < ApplicationController
+  before_filter :require_user
   # GET /appointments
   # GET /appointments.json
   def index
@@ -18,6 +19,8 @@ class AppointmentsController < ApplicationController
     @shares = Shares.find(:all, :conditions => { :appointment_id => @appointment.id }) 
     @participants = User.all(:conditions => ["id IN (?)", @shares.map{|s| s.user_id}])
     @assignment = Shares.find(:first, :conditions => [ 'appointment_id = ? AND user_id = ?', @appointment.id, current_user.id ] )
+    @new_comment = @appointment.comments.build
+    @comments = @appointment.comments.all
     @participants.each do |p|
       if p.id == current_user.id
         @assigned = true
