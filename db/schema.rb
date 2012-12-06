@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20121205150906) do
     t.string   "name"
     t.text     "description"
     t.integer  "author_id"
+    t.boolean  "important"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

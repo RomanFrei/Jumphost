@@ -39,9 +39,17 @@
 			<div id="menu_bot">
 				<% if current_user %>
 					<div class="menuitem">
-							<%= link_to "Create Appointment", new_appointment_path %>
+							<%= link_to "Create Appointment", new_appointment_path, :class => 'menulink' %>
 					</div>
 				<% end %>
+				<% if current_user && ufinder(current_user.id) == "Roman" %>
+					<div class="menuitem">
+        					<%= link_to "Delete all", destroy_all_appointments_path, :class => 'ibutton' %>
+					</div>
+					<div class="menuitem">
+						<%= link_to "Create dummies", create_dummies_path, :class => 'ibutton' %>
+					</div>
+				<% end %> 
 			</div>
 		</div>
 	</div>

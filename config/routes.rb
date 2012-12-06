@@ -4,6 +4,8 @@ Jumphost::Application.routes.draw do
   end
  	 match 'date' => 'appointments#index', :as => :date
 	 match 'destroy_appointment' => 'appointments#destroy', :as => :destroy_appointment
+	 match 'destroy_all_appointments' => 'appointments#destroy_all', :as => :destroy_all_appointments
+	 match 'create_dummies' => 'appointments#create_dummies', :as => :create_dummies
   resources :users, :user_sessions
 	 match 'login' => 'user_sessions#new', :as => :login
   	 match 'logout' => 'user_sessions#destroy', :as => :logout

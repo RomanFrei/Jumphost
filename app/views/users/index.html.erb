@@ -1,3 +1,3 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %><div id="content_information"><%= flash[:notice] %></div><% end %>
+
 <p>You have to log in.</p>
-<br />

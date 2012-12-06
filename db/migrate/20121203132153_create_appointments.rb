@@ -5,6 +5,7 @@ class CreateAppointments < ActiveRecord::Migration
       t.string	 :name
       t.text 	 :description
       t.integer	 :author_id
+      t.boolean  :important
 
       t.timestamps
     end

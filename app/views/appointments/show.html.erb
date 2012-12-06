@@ -1,27 +1,16 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %><div id="content_information"><%= flash[:notice] %></div><% end %>
 
 <div id="left_corner">
 
-		<table>
-		  <tr>
-	    <th></th>
-	    <th></th>
-	    <th></th>
-	    <th></th>
-	  </tr>
-
-	  <tr>
-		<h3><%= @appointment.name %></h3>
-		<p>Description: <%= @appointment.description %></p>
-		<p>Time: <%= format_time(@appointment.time) %></p>
-		<p>Author: <%= @creator.username %></p>
-		<p>Participants:
-			<% @participants.each do |p| %>
-				<%= p.username %>
-			<% end %>
-		</p>
-	  </tr>
-	</table>
+	<p class="p_app_show"><%= @appointment.name %></p>
+	<p class="p_app_show">Description: <%= @appointment.description %></p>
+	<p class="p_app_show">Time: <%= format_time(@appointment.time) %></p>
+	<p class="p_app_show">Author: <%= @creator.username %></p>
+	<p class="p_app_show">Participants:
+		<% @participants.each do |p| %>
+			<%= p.username %>
+		<% end %>
+	</p>
 
 	<% if current_user.id != @appointment.author_id %>
 		<% if @assigned == true %>
@@ -37,6 +26,10 @@
 </div>
 
 <div id="right_corner">
+	<%= form_for([@appointment, @new_comment]) do |f| %>
+		<%= f.text_field :content %>
+		<%= f.submit "Comment" %>
+	<% end %>
 	<table id="app_table">
 		<tr>
 			<th>Content</th>
@@ -50,9 +43,4 @@
 			<% end %>
 	</table>
 	<br>
-	<h3>New</h3>
-	<%= form_for([@appointment, @new_comment]) do |f| %>
-		<%= f.text_field :content %>
-		<%= f.submit %>
-	<% end %>
 </div>

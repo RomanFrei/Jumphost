@@ -92,4 +92,21 @@ class AppointmentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def destroy_all
+    Appointment.delete_all
+
+    respond_to do |format|
+      format.html { redirect_to appointments_url }
+      format.json { head :no_content }
+    end
+
+  end
+
+  def create_dummies
+    for i in 1..20
+    	Appointment.create(:name => "Dummy#{i}", :description => "testdescription", :time => Time.now, :author_id => current_user.id)
+    end
+    redirect_to :back
+  end
 end

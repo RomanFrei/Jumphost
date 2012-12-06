@@ -19,11 +19,13 @@
     <%= f.label :description %><br />
     <%= f.text_field :description %><br />
   </div>
+  <div class="field">
+    <%= f.label :important %><br />
+    <%= f.check_box :important, :default => false %>
+  </div>
   <div class="date">
     <%= f.label :date %><br />
-    <%= f.date_select :time %><br />
-    <%= f.label :time %><br />
-    <%= f.time_select :time %>
+    <%= f.datetime_select :time, :start_year => Time.now.year, :end_year => Time.now.year + 1 %><br />
   </div><br>
   <div class="actions">
     <%= f.submit %>

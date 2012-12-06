@@ -1,0 +1,6 @@
+<td><%= link_to appointment.name, appointment_path(appointment.id), :class => 'button' %></td>
+<td><%= truncate(appointment.description, :length => 70) %></td>
+<td><%= format_time(appointment.time) %></td>
+<% if appointment.author_id == current_user.id %>
+	<td><%= link_to "Edit", edit_appointment_path(appointment.id), :class => 'button' %> <%= link_to "Delete", destroy_appointment_path(:id => appointment.id), importance(appointment.important), :confirm => 'Are you sure?' %></td>
+<% end %>

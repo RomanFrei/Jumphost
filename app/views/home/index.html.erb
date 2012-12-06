@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %><div id="content_information"><%= flash[:notice] %></div><% end %>
 
 <table id="app_table">
 	<tr>

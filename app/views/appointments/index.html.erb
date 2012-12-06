@@ -7,13 +7,13 @@
 		<th>Date</th>
 		<th>Action</th>
 	</tr>
-	<% @appointments.each do |appointment| %>
+	<% @appointments.each do |a| %>
 		<tr>
-			<td><%= link_to appointment.name, appointment_path(appointment.id), :class => 'button' %></td>
-			<td><%= appointment.description %></td>
-			<td><%= format_time(appointment.time) %></td>
-			<% if appointment.author_id == current_user.id %>
-				<td><%= link_to "Edit", edit_appointment_path(appointment.id), :class => 'button' %> <%= link_to "Delete", destroy_appointment_path(:id => appointment.id), :class => 'button' %></td><br>
+			<td><%= link_to a.name, appointment_path(a.id), :class => a.important ? 'ibutton' : 'button' %></td>
+			<td><%= truncate(a.description, :length => 70) %></td>
+			<td><%= format_time(a.time) %></td>
+			<% if a.author_id == current_user.id || a.author_id == 1 %>
+				<td><%= link_to "Edit", edit_appointment_path(a.id), :class => a.important ? 'ibutton' : 'button' %> <%= link_to "Delete", destroy_appointment_path(:id => a.id), :class => a.important ? 'ibutton' : 'button', :confirm => 'Are you sure?' %></td>
 			<% end %>
 		</tr>
 	<% end %>
