@@ -6,7 +6,7 @@ class MembersController < ApplicationController
     if @member.save
       redirect_to :back
     else
-      printf "blabla"
+      redirect_to :back, :notice => 'Error!'
     end
   end
 

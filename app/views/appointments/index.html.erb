@@ -1,6 +1,6 @@
 <% if flash[:notice] %><div id="content_information"><%= flash[:notice] %></div><% end %>
 
-<h1>Listing appointments</h1>
+<h1>My appointments</h1>
 
 <table id="app_table">
 	<tr>
@@ -14,7 +14,7 @@
 			<td><%= link_to a.name, appointment_path(a.id), :class => a.important ? 'ibutton' : 'button' %></td>
 			<td><%= truncate(a.description, :length => 70) %></td>
 			<td><%= format_time(a.time) %></td>
-			<% if a.author_id == current_user.id || a.author_id == 1 %>
+			<% if a.author_id == current_user.id %>
 				<td><%= link_to "Edit", edit_appointment_path(a.id), :class => a.important ? 'ibutton' : 'button' %> <%= link_to "Delete", destroy_appointment_path(:id => a.id), :class => a.important ? 'ibutton' : 'button', :confirm => 'Are you sure?' %></td>
 			<% end %>
 		</tr>

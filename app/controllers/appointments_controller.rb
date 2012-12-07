@@ -3,8 +3,7 @@ class AppointmentsController < ApplicationController
   before_filter :get_memberships, :only => [:show, :index]
 
   def index
-    @appointments = Appointment.all(:conditions => ["id IN (?) OR author_id = ?", @memberships.map{|m| m.appointment_id}, current_user.id])
-
+      @appointments = Appointment.all(:conditions => ["id IN (?) OR author_id = ?", @memberships.map{|m| m.appointment_id}, current_user.id])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @appointments }
@@ -14,7 +13,7 @@ class AppointmentsController < ApplicationController
   def show
     @appointment = Appointment.find(params[:id])
     @memberships.each do |m|
-	if m.appointment_id == @appointment.id || @appointment.author_id == current_user.id
+	if [ m.appointment_id == @appointment.id || @appointment.author_id == current_user.id ]
 	    @access = true
 	    @creator = User.find(@appointment.author_id)
 	    @shares = Shares.find(:all, :conditions => { :appointment_id => @appointment.id }) 
@@ -24,14 +23,14 @@ class AppointmentsController < ApplicationController
 	    @members = @appointment.members.all
 	    @new_member = @appointment.members.build
 	    @comments = @appointment.comments.all
-	    @users = User.all(:conditions => [ 'id != ?', current_user.id ] )
+	    @users = User.all(:conditions => [ "id NOT IN (?)", @appointment.members.map{|m| m.user_id} ] )
 	    @participants.each do |p|
 	      if p.id == current_user.id
 		@assigned = true
 	      end
 	    end
 	else
-	end
+  end
   end
   if @access != true
 	redirect_to appointments_path, :notice => "You are not allowed to see this appointment!"
@@ -39,7 +38,7 @@ class AppointmentsController < ApplicationController
 	respond_to do |format|
         format.html # show.html.erb
 	format.json { render json: @appointment }
-  end
+        end
   end
   end
 
@@ -64,6 +63,7 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.create(params[:appointment])
     @appointment.author_id = current_user.id
+    Member.create(:user_id => current_user.id, :appointment_id => @appointment.id)
 
     respond_to do |format|
       if @appointment.save

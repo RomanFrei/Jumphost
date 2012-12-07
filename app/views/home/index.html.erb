@@ -7,6 +7,6 @@
 	</tr>
 	<tr>
 		<td><%= link_to "Appointments", appointments_path, :class => 'button' %></td>
-		<td><%= @latest_appointment %></td> 
+		<td><%= @latest_appointment.nil? ? "none" : link_to(@latest_appointment.name, appointment_path(@latest_appointment), :class => @latest_appointment.important ? 'ibutton' : 'button') %></td> 
 	</tr>
 </table>
