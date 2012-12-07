@@ -22,7 +22,9 @@
 					</div>
 					<div class="menuitem">
 						<%= link_to "Logout", :logout, :class => 'menulink' %>
-	
+					</div>
+					<div class="menuitem">
+						<%= link_to "Account", user_path(current_user.id), :class => 'menulink' %>
 					</div>
 				<% else %>
 					<div class="menuitem">

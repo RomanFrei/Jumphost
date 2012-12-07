@@ -1,6 +1,7 @@
 Jumphost::Application.routes.draw do
-  resources :appointments do 
+  resources :appointments, shallow: true do 
          resources :comments
+	 resources :members
   end
  	 match 'date' => 'appointments#index', :as => :date
 	 match 'destroy_appointment' => 'appointments#destroy', :as => :destroy_appointment

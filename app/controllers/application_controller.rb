@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   helper_method :current_user
+
+  def get_memberships
+    @memberships = Member.all(:conditions => { :user_id => current_user.id })
+  end
   
   private
 

@@ -1,9 +1,9 @@
 class AppointmentsController < ApplicationController
   before_filter :require_user
-  # GET /appointments
-  # GET /appointments.json
+  before_filter :get_memberships, :only => [:show, :index]
+
   def index
-    @appointments = Appointment.all
+    @appointments = Appointment.all(:conditions => ["id IN (?) OR author_id = ?", @memberships.map{|m| m.appointment_id}, current_user.id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,25 +11,36 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  # GET /appointments/1
-  # GET /appointments/1.json
   def show
     @appointment = Appointment.find(params[:id])
-    @creator = User.find(@appointment.author_id)
-    @shares = Shares.find(:all, :conditions => { :appointment_id => @appointment.id }) 
-    @participants = User.all(:conditions => ["id IN (?)", @shares.map{|s| s.user_id}])
-    @assignment = Shares.find(:first, :conditions => [ 'appointment_id = ? AND user_id = ?', @appointment.id, current_user.id ] )
-    @new_comment = @appointment.comments.build
-    @comments = @appointment.comments.all
-    @participants.each do |p|
-      if p.id == current_user.id
-        @assigned = true
-      end
-    end
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @appointment }
-    end
+    @memberships.each do |m|
+	if m.appointment_id == @appointment.id || @appointment.author_id == current_user.id
+	    @access = true
+	    @creator = User.find(@appointment.author_id)
+	    @shares = Shares.find(:all, :conditions => { :appointment_id => @appointment.id }) 
+	    @participants = User.all(:conditions => ["id IN (?)", @shares.map{|s| s.user_id}])
+	    @assignment = Shares.find(:first, :conditions => [ 'appointment_id = ? AND user_id = ?', @appointment.id, current_user.id ] )
+	    @new_comment = @appointment.comments.build
+	    @members = @appointment.members.all
+	    @new_member = @appointment.members.build
+	    @comments = @appointment.comments.all
+	    @users = User.all(:conditions => [ 'id != ?', current_user.id ] )
+	    @participants.each do |p|
+	      if p.id == current_user.id
+		@assigned = true
+	      end
+	    end
+	else
+	end
+  end
+  if @access != true
+	redirect_to appointments_path, :notice => "You are not allowed to see this appointment!"
+  else
+	respond_to do |format|
+        format.html # show.html.erb
+	format.json { render json: @appointment }
+  end
+  end
   end
 
   # GET /appointments/new
