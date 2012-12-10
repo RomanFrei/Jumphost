@@ -4,7 +4,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def get_memberships
-      @memberships = Member.all(:conditions => { :user_id => current_user.id })
+      if current_user
+        @memberships = Member.all(:conditions => { :user_id => current_user.id })
+      end
   end
   
   private

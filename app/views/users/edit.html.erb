@@ -1,3 +1,15 @@
-<h1>Editing user</h1>
+<div id="left_corner">
+<h1>Edit account</h1>
 
 <%= render 'form' %>
+
+</div>
+<h1>My friends</h1><br>
+<% form_tag friends_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+<div id="right_corner">
+</div>

@@ -26,10 +26,9 @@
 				<%= ufinder(m.user_id) %>
 			<% end %></p>
 			<%= form_for([@appointment, @new_member]) do |f| %>
-				<%= f.select 'user_id', options_for_select(@users.collect{ |u| [u.username, u.id] }) %> <%= f.submit "Add" %>
+				<%= f.select 'user_id', options_for_select(@invitable.collect{ |u| [u.username, u.id] }) %> <%= f.submit "Add" %>
 			<% end %>
 	<% end %>
-
 </div>
 
 <div id="right_corner">
