@@ -8,6 +8,12 @@ before_filter :get_memberships
     else
       @latest_appointment = nil
     end
+
+    if User.count != 0
+      @latest_user = User.last
+    else
+      @latest_user = nil
+    end
   end
 
   def show

@@ -1,3 +1,16 @@
 <% if flash[:notice] %><div id="content_information"><%= flash[:notice] %></div><% end %>
-
-<p>You have to log in.</p>
+<h1>Users index</h1>
+<table id="app_table">
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Joindate</th>
+	</tr>
+	<% @users.each do |u| %>
+		<tr>
+			<td><%= u.username %></td>
+			<td><%= u.email %></td>
+			<td><%= format_time(u.created_at) %></td>
+		</tr>
+	<% end %>
+</table>
