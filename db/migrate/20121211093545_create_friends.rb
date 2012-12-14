@@ -3,6 +3,7 @@ class CreateFriends < ActiveRecord::Migration
     create_table :friends do |t|
       t.integer :user_id
       t.integer :buddy_id
+			t.boolean :pending, :default => true
 
       t.timestamps
     end

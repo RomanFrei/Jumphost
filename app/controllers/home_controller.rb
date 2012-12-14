@@ -9,6 +9,8 @@ before_filter :get_memberships
       @latest_appointment = nil
     end
 
+		@friendship_requests = Friend.where(:pending => true, :buddy_id => current_user.id ) 
+
     if User.count != 0
       @latest_user = User.last
     else

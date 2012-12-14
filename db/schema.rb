@@ -34,14 +34,9 @@ ActiveRecord::Schema.define(:version => 20121211093545) do
   create_table "friends", :force => true do |t|
     t.integer  "user_id"
     t.integer  "buddy_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "groups", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "pending",    :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "members", :force => true do |t|

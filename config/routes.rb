@@ -10,6 +10,8 @@ Jumphost::Application.routes.draw do
 	 match 'create_dummies' => 'appointments#create_dummies', :as => :create_dummies
   resources :users, :user_sessions
 	resources :friends
+	 match 'accept_friendship' => 'friends#accept_friendship', :as => :accept_friendship
+	resources :groups
 	 match 'add_friend' => 'friends#add', :as => :add_friend
 	 match 'login' => 'user_sessions#new', :as => :login
   	 match 'logout' => 'user_sessions#destroy', :as => :logout

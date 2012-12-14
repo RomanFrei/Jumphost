@@ -13,4 +13,21 @@
 		<td><%= link_to "Users", users_path, :class => 'button' %></td>
 		<td><%= @latest_user.nil? ? "none" : link_to(@latest_user.username, user_path(@latest_user), :class => 'button') %></td>
 	</tr>
+</table
+
+<h1>Friendship requests</h1>
+
+<table id="app_table">
+	<tr>
+		<th>From</th>
+		<th>Created_at</th>
+		<th></th>
+	</tr>
+	<% @friendship_requests.each do |fr| %>
+		<tr>
+			<td><%= ufinder(fr.user_id) %></td>
+			<td><%= format_time(fr.created_at) %></td>
+			<td><%= link_to "Accept", accept_friendship_path(:id => fr.id), :class => 'button' %></td>
+		</tr>
+	<% end %>
 </table>

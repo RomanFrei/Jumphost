@@ -1,4 +1,7 @@
-<h1>Add friends</h1>
-<br>
+<% if flash[:notice] %><div id="content_information"><%= flash[:notice] %></div><% end %>
 
-<%= render 'form' %>
+<div id="left_corner">
+	<h1>Add friends</h1>
+	<br>
+		<%= render 'form' %>
+</div>

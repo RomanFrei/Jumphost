@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :require_user
+  before_filter :require_user, :only => [ :show, :index ]
 
   # GET /users
   # GET /users.json
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-		@friends = @user.friends.all
+		@friends = @user.friends.where(:pending => false)
 
     respond_to do |format|
       format.html # show.html.erb
