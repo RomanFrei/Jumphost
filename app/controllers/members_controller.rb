@@ -10,4 +10,16 @@ class MembersController < ApplicationController
     end
   end
 
+	def destroy
+		@appointment = Appointment.find(params[:appointment_id])
+		@member = Member.find(params[:id])
+		@member.delete
+
+    respond_to do |format|
+      format.html { redirect_to @appointment }
+      format.json { head :no_content }
+    end
+	end
+		
+
 end

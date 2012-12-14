@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div id="left_corner">
+<h1>Account</h1><br>
 
 <p class="p_app_show">
   <b>Username:</b>
@@ -22,12 +23,14 @@
 	<tr>
 		<th>Name</th>
 		<th>Added</th>
+		<th></th>
 	</tr>
 
 	<tr>
 		<% @friends.each do |f| %>
 			<td><%= ufinder(f.buddy_id) %></td>
 			<td><%= format_time(f.created_at) %></td>
+			<td><%= link_to "Remove", friend_path(f.id), :method => 'delete', :class => 'button' %></td>
 	<tr>
 <% end %>
 </table>

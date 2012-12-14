@@ -8,6 +8,7 @@
 		<th>Description</th>
 		<th>Date</th>
 		<th>Action</th>
+		<th>Creator</th>
 	</tr>
 	<% @appointments.each do |a| %>
 		<tr>
@@ -16,7 +17,11 @@
 			<td><%= format_time(a.time) %></td>
 			<% if a.author_id == current_user.id %>
 				<td><%= link_to "Edit", edit_appointment_path(a.id), :class => a.important ? 'ibutton' : 'button' %> <%= link_to "Delete", destroy_appointment_path(:id => a.id), :class => a.important ? 'ibutton' : 'button', :confirm => 'Are you sure?' %></td>
-			<% end %>
+				<td></td>
+			<% else %>
+				<td></td>
+			<td><%= ufinder(a.author_id) %></td>
+			<% end %>	
 		</tr>
 	<% end %>
 </table>

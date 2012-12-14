@@ -15,6 +15,6 @@
 		<%= f.select 'buddy_id', options_for_select(@users.collect{ |u| [u.username, u.id] }) %>
 	</div><br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Friendship" %>
   </div>
 <% end %>

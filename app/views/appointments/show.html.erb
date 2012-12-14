@@ -23,7 +23,9 @@
 		<p class="p_app_show">Created at: <%= format_time(@appointment.created_at) %></p>
 			<p class="p_app_show">Members:
 			<% @members.each do |m| %>
-				<%= ufinder(m.user_id) %>
+				<% if m.user_id != current_user.id %>
+					<%= link_to ufinder(m.user_id), delete_member_path(:appointment_id => @appointment.id, :id => m.id), :class => 'button' %>
+				<% end %>
 			<% end %></p>
 			<!-- TODO ADD ALL FRIENDS -->
 			<%= form_for([@appointment, @new_member]) do |f| %>

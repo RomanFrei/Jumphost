@@ -5,14 +5,15 @@
 		<th>Name</th>
 		<th>Email</th>
 		<th>Joindate</th>
-		<td>Add</th>
+		<td></th>
 	</tr>
 	<% @users.each do |u| %>
 		<tr>
 			<td><%= u.username %></td>
 			<td><%= u.email %></td>
 			<td><%= format_time(u.created_at) %></td>
-			<td><%= link_to("Add as friend", add_friend_path(:id => u.id), :class => 'button' ) %></td>
+			<td><% if current_user.id != u.id %> 
+						<%= link_to("Add as friend", add_friend_path(:id => u.id), :class => 'button' ) %><% end %></td>
 		</tr>
 	<% end %>
 </table>
