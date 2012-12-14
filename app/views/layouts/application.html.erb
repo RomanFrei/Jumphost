@@ -43,6 +43,9 @@
 					<div class="menuitem">
 							<%= link_to "Create Appointment", new_appointment_path, :class => 'menulink' %>
 					</div>
+					<div class="menuitem">
+							<%= link_to "Add Friend", new_friend_path, :class => 'menulink' %>
+					</div>
 				<% end %>
 				<% if current_user && ufinder(current_user.id) == "Roman" %>
 					<div class="menuitem">

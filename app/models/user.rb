@@ -4,5 +4,6 @@ class User < ActiveRecord::Base
   has_many :appointments
   has_many :shares
   has_many :comments
+	has_many :friends
   belongs_to :members
 end

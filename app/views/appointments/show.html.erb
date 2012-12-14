@@ -25,8 +25,10 @@
 			<% @members.each do |m| %>
 				<%= ufinder(m.user_id) %>
 			<% end %></p>
+			<!-- TODO ADD ALL FRIENDS -->
 			<%= form_for([@appointment, @new_member]) do |f| %>
-				<%= f.select 'user_id', options_for_select(@invitable.collect{ |u| [u.username, u.id] }) %> <%= f.submit "Add" %>
+				<%= f.select 'user_id', options_for_select(@invitable.collect{ |u| [ufinder(u.buddy_id), u.buddy_id] }) %> 
+				<%= f.submit "Add" %>
 			<% end %>
 	<% end %>
 </div>

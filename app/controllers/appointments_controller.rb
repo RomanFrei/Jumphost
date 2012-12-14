@@ -23,7 +23,7 @@ class AppointmentsController < ApplicationController
         @members = @appointment.members.all
         @new_member = @appointment.members.build
         @comments = @appointment.comments.all
-	@invitable = User.where( "id NOT IN (?)", @members.map(&:user_id) )
+				@invitable = current_user.friends.where( 'buddy_id NOT IN (?)', @members.map(&:user_id) )
         @participants.each do |p|
           if p.id == current_user.id
             @assigned = true
