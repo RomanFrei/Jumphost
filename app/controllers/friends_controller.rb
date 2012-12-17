@@ -44,9 +44,9 @@ before_filter :require_user
 	def destroy
 		@user = current_user
 		@friend = Friend.find(params[:id])
-		@friendship = Friend.where(:pending => false, :user_id => @friend.buddy_id, :buddy_id => @friend.user_id)
+		@friendship = Friend.where(:user_id => @friend.buddy_id, :buddy_id => current_user.id)
 		@friend.delete
-		@friendship.delete
+		@friendship.delete_all #BUG?
 
     respond_to do |format|
       format.html { redirect_to @user }
